@@ -1,0 +1,7 @@
+{
+  "file": "/data/data/com.termux/files/home/Swarmulacrum/core/security/guard.py",
+  "classes": [],
+  "functions": [
+    "validate_command"
+  ]
+}
