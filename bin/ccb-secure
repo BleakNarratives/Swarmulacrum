@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# CCB Secure Wrapper
+# Invokes OutClaw validation before executing core modules.
+
+TARGET=$1
+if [ -z "$TARGET" ]; then
+    echo "Usage: ccb-secure <command>"
+    exit 1
+fi
+
+python3 /storage/emulated/0/RootBase/modules/ccb_workbench_v1/core/security/outclaw_validator.py "$TARGET" > /dev/null 2>&1
+RESULT=$?
+
+if [ $RESULT -eq 0 ]; then
+    echo "Security check passed. Executing..."
+    eval "$TARGET"
+else
+    echo "Security violation: OutClaw rejected the command."
+    exit 1
+fi

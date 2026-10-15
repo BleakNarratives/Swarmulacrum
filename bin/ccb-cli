@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+# GRIMOIRE — The Unified Spellcasting CLI
+# BleakNarratives / Sprint Ralphie
+# DNA_TAG: ORIGIN=BleakNarratives | PILLAR=orchestration | ROLE=spellbook
+
+GRIMOIRE_HOME="/storage/emulated/0/RootBase/modules/ccb_workbench_v1/.grimoire"
+CHAINS_DIR="/storage/emulated/0/RootBase/modules/ccb_workbench_v1/core/swarm/MikeySwarm/chains"
+RALPHIE_SCRIPT="/storage/emulated/0/RootBase/modules/ccb_workbench_v1/bin/ralphie-unified.sh"
+CYAN="\033[36m"; GREEN="\033[32m"; RED="\033[31m"; RESET="\033[0m"
+
+# Ensure GRIMOIRE_HOME exists
+mkdir -p "$GRIMOIRE_HOME"/{bus,spells,wards,summons}
+
+ward() {
+    local ts=$(date +%Y%m%d_%H%M%S)
+    local snap_dir="$GRIMOIRE_HOME/wards/$ts"
+    mkdir -p "$snap_dir"
+    [ -f "$1" ] && cp "$1" "$snap_dir/" && echo -e "${GREEN}Ward placed: $snap_dir${RESET}" || echo -e "${RED}Specify file to ward${RESET}"
+}
+
+cast() {
+    [ -z "$1" ] && { echo -e "${RED}Specify chain: grimoire cast <chain_name_or_path>${RESET}"; exit 1; }
+    local chain="$1"
+    [ ! -f "$chain" ] && chain="$CHAINS_DIR/$1.json"
+    [ ! -f "$chain" ] && chain="$CHAINS_DIR/chain-$1.json"
+    [ ! -f "$chain" ] && { echo -e "${RED}Chain not found: $1${RESET}"; exit 1; }
+    echo -e "${CYAN}Casting: $chain${RESET}"
+    bash "$RALPHIE_SCRIPT" run-chain "$chain"
+}
+
+scry() {
+    local target="${1:-$HOME/MikeySwarm/logs/archon}"
+    echo -e "${CYAN}Scrying: $target${RESET}"
+    ls -t "$target"/*.json 2>/dev/null | head -5 | while read f; do
+        echo "---"
+        echo "FILE: $f"
+        python3 -c "
+import json,sys
+d=json.load(open('$f'))
+print(f'Group: {d.get(\"group\",\"?\")} | Outcome: {d.get(\"outcome\",\"?\")} | Delta: {d.get(\"mike_delta_score\",\"?\")}')
+print(f'Archon: {d.get(\"archon_prose\",\"?\")[:120]}...')
+" 2>/dev/null || cat "$f"
+    done
+}
+
+summon() {
+    local agent="${1:-anchor}"
+    local bus_file=$(ls -t "$GRIMOIRE_HOME/bus/${agent}_"*.json 2>/dev/null | head -1)
+    if [ -z "$bus_file" ]; then
+        echo -e "${RED}No bus entry for: $agent${RESET}"
+        return 1
+    fi
+    echo -e "${CYAN}Summoning $agent from bus...${RESET}"
+    cat "$bus_file"
+}
+
+listen() {
+    echo -e "${CYAN}Listening on grimoire bus...${RESET}"
+    tail -f "$GRIMOIRE_HOME"/bus/*.json 2>/dev/null || echo "Bus is empty. Agents not yet writing."
+}
+
+invoke() {
+    case "$1" in
+        boardroom)
+            shift
+            echo "$@" | python3 ~/RootBase/Official-Vertical-AI-Boardroom/boardroom.py
+            ;;
+        *) echo -e "${RED}Unknown invocation: $1${RESET}" ;;
+    esac
+}
+
+morning() {
+    echo -e "${CYAN}GRIMOIRE MORNING RITUAL${RESET}"
+    bash ~/ralphie-unified.sh morning
+    scry
+    summon gemini-cli 2>/dev/null || true
+}
+
+evening() {
+    echo -e "${CYAN}GRIMOIRE EVENING RITUAL${RESET}"
+    bash ~/ralphie-unified.sh evening
+    local ts=$(date +%Y%m%d_%H%M%S)
+    cat > "$GRIMOIRE_HOME/bus/claude_$ts.json" << BUSEOF
+{
+  "agent": "claude",
+  "timestamp": "$(date -Iseconds)",
+  "task": "Session complete",
+  "insight": "Grimoire built. Session 1 closed properly.",
+  "next_suggestion": "Run Groups A+B delta analysis. Build scry --synthesize mode.",
+  "completed": ["grimoire_stub", "claude_md_updated", "handoff_complete"]
+}
+BUSEOF
+    echo -e "${GREEN}Evening bus entry written.${RESET}"
+}
+
+case "$1" in
+    ward)    shift; ward "$@" ;;
+    cast)    shift; cast "$@" ;;
+    scry)    shift; scry "$@" ;;
+    summon)  shift; summon "$@" ;;
+    listen)  listen ;;
+    invoke)  shift; invoke "$@" ;;
+    morning) morning ;;
+    evening) evening ;;
+    *)
+        echo -e "${CYAN}GRIMOIRE — Spellcasting CLI${RESET}"
+        echo "Spells: ward | cast | scry | summon | listen | invoke | morning | evening"
+        ;;
+esac

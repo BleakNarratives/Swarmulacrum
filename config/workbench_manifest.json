@@ -1,0 +1,13 @@
+{
+  "module_name": "ccb_workbench_v1",
+  "version": "1.0.0",
+  "pillars": ["orchestration", "security", "syntax_ast"],
+  "entrypoint": "~/bin/ccb-cli-run",
+  "components": {
+    "orchestrator": "Grimoire",
+    "swarm_engine": "MikeySwarm + Swarmulacrum",
+    "security_gate": "OutClaw",
+    "ast_parser": "SyntaxIntelligence"
+  },
+  "bus_status": "online"
+}

@@ -1,0 +1,9 @@
+{
+    "scout_id": "boies_depo_tax",
+    "target_domain": "tax_evasion",
+    "tactical_logic_style": "financial_ledger_discrepancy",
+    "primary_statutory_anchor": "26 USC",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Adjust strings, hooks, and local regex queries manually here."
+}

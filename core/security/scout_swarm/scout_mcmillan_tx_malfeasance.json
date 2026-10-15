@@ -1,0 +1,9 @@
+{
+    "scout_id": "mcmillan_tx_malfeasance",
+    "target_domain": "public_officer_corruption",
+    "tactical_logic_style": "chain_of_custody_audit",
+    "primary_statutory_anchor": "Misfeasance",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Adjust strings, hooks, and local regex queries manually here."
+}

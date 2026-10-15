@@ -1,0 +1,44 @@
+{
+    "civil_rights": {
+        "statutes": [
+            "42_USC_1983",
+            "18_USC_241",
+            "18_USC_242"
+        ],
+        "focus": [
+            "violations_of_rights",
+            "color_of_law",
+            "conspiracy"
+        ]
+    },
+    "constitutional": {
+        "statutes": [
+            "supremacy_clause_art_vi",
+            "violation_of_oath"
+        ],
+        "focus": [
+            "jurisdictional_overreach",
+            "breach_of_duty"
+        ]
+    },
+    "financial_securities": {
+        "statutes": [
+            "tax_fraud",
+            "securities_fraud_15_USC_78j"
+        ],
+        "focus": [
+            "asset_diversion",
+            "malfeasance"
+        ]
+    },
+    "official_misconduct": {
+        "statutes": [
+            "dereliction_of_duty",
+            "misfeasance",
+            "malfeasance"
+        ],
+        "focus": [
+            "public_officials_gone_wild"
+        ]
+    }
+}

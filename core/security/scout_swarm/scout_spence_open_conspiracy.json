@@ -1,0 +1,9 @@
+{
+    "scout_id": "spence_open_conspiracy",
+    "target_domain": "official_conspiracy",
+    "tactical_logic_style": "bad_faith_intent",
+    "primary_statutory_anchor": "18 USC 241",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Adjust strings, hooks, and local regex queries manually here."
+}

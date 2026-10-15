@@ -1,0 +1,9 @@
+{
+    "scout_id": "bugliosi_close_oath",
+    "target_domain": "dereliction_of_duty",
+    "tactical_logic_style": "statutory_mandate_enforcement",
+    "primary_statutory_anchor": "Violation of Oath",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Adjust strings, hooks, and local regex queries manually here."
+}

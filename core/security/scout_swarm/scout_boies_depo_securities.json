@@ -1,0 +1,9 @@
+{
+    "scout_id": "boies_depo_securities",
+    "target_domain": "securities_fraud",
+    "tactical_logic_style": "evasive_text_pinning",
+    "primary_statutory_anchor": "15 USC",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Mess with Saul's chaos loops or Atticus's structural ethics baseline directly."
+}

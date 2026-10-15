@@ -1,0 +1,34 @@
+{
+  "boardroom": {
+    "title": "OUTCLAW TITAN LEGAL BOARDROOM -- DISPATCH",
+    "panels": {
+      "BAILEY_CROSS": "Cross-examination sequence initiated. Look at the timeline. If the official's field report contradicts the raw body-cam or dispatch logs, their credibility is shattered under 42 USC 1983.",
+      "SCALIA_TEXT": "Show me the explicit text. Where does the statute grant them the authority to execute this action without a prior warrant? If the text does not say it, it does not exist. Immunity denied.",
+      "TEXAS_PROSECUTOR": "This is a straight-line breach of duty. They had a clear, non-discretionary operational mandate, and they willfully bypassed it. Document the chain of custody and pin down the malfeasance layout immediately."
+    }
+  },
+  "wizard": {
+    "title": "SUI JURIS PUBLIC ACCOUNTABILITY DISPATCH",
+    "description": "This guide will help determine what CAN or CANNOT happen with your potential legal claim in plain English.",
+    "steps": {
+      "STEP_1": "Was the person acting in an official capacity (like a police officer, judge, or city official) while on duty or using their official authority?",
+      "STEP_2": "Did their action directly violate a specific constitutional right (like your 4th Amendment protection against illegal search, or 1st Amendment free speech)?",
+      "STEP_3": "Does this official hold a formal, sworn oath of office to protect the public or execute specific statutory duties?",
+      "STEP_4": "Did they intentionally neglect their mandatory duty, or commit a clear act of wrongdoing/malfeasance?"
+    },
+    "results": {
+      "TITLE": "EVALUATION RESULTS",
+      "CLAIM_1983": "CIVIL RIGHTS CLAIM (42 USC 1983)",
+      "CAN_1983": "You have the core elements for a Federal Civil Rights suit. Next Step: Look up standard Pro Se federal complaint templates for Section 1983.",
+      "CANNOT_1983": "A federal civil rights claim is legally barred here. Why? Because standard law requires BOTH an official acting under power AND a direct constitutional violation. One or both of those elements is missing.",
+      "CLAIM_OATH": "BREACH OF OATH / DERELICTION OF DUTY",
+      "CAN_OATH": "There is a strong basis to pursue administrative or statutory liability. Next Step: Locate the official's public bond or file a formal administrative grievance.",
+      "CANNOT_OATH": "A formal breach of duty claim is weak or barred. Why? To hold an official accountable for a breach of duty, the action must break a mandatory statutory rule, not just be unfair or aggressive behavior."
+    }
+  },
+  "rebuttal": {
+    "title": "FACTUAL BASELINE RECORD EXTRACTION",
+    "prompt_header": "ANTI-GASLIGHT SYSTEM PROMPT INSTRUCTIONS GENERATED:",
+    "no_matches": "Zero database anchors found for query parameter"
+  }
+}

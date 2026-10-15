@@ -1,0 +1,9 @@
+{
+    "scout_id": "scalia_text_warrantless",
+    "target_domain": "4th_amendment_breach",
+    "tactical_logic_style": "strict_textual_overreach",
+    "primary_statutory_anchor": "18 USC 242",
+    "depth_threshold": "sweeping_and_broad",
+    "tuned_status": false,
+    "custom_override_notes": "User sandbox: Mess with Saul's chaos loops or Atticus's structural ethics baseline directly."
+}
