@@ -16,14 +16,22 @@
         table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; margin-bottom: 30px; }
         th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155; font-size: 14px; }
         th { background: #0f172a; color: #94a3b8; text-transform: uppercase; font-size: 12px; }
-        tr.clickable { cursor: pointer; transition: background 0.15s ease; }
-        tr.clickable:hover { background: #334155; }
+        tr.clickable { cursor: pointer; transition: background 0.15s ease; outline: none; }
+        tr.clickable:hover, tr.clickable:focus { background: #334155; }
         .tag-pass { color: #4ade80; font-weight: bold; }
         .tag-crit { color: #f87171; font-weight: bold; }
         .drawer { display: none; background: #0f172a; border-bottom: 2px solid #38bdf8; padding: 15px 20px; font-family: monospace; font-size: 13px; color: #cbd5e1; }
-        .issue-box { background: #450a0a; border: 1px solid #f87171; padding: 8px 12px; border-radius: 4px; margin-bottom: 8px; color: #fca5a5; }
         .code-block { background: #1e293b; padding: 12px; border-radius: 6px; overflow-x: auto; max-height: 250px; border: 1px solid #334155; color: #38bdf8; white-space: pre-wrap; }
         .footer { text-align: center; font-size: 12px; color: #64748b; margin-top: 40px; }
+
+        @media (max-width: 600px) {
+            .metrics { grid-template-columns: 1fr 1fr; }
+            .header { flex-direction: column; text-align: center; }
+            .badge { margin-top: 10px; }
+            table, thead, tbody, th, td, tr { display: block; }
+            thead { display: none; }
+            tr.clickable { border: 1px solid #334155; margin-bottom: 10px; border-radius: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -14531,6 +14539,25 @@ def test_generate_document_draft_label():
                 el.style.display = "block";
             }
         }
+
+        document.addEventListener('keydown', function(event) {
+            const rows = Array.from(document.querySelectorAll('tr.clickable'));
+            const currentIndex = rows.findIndex(r => r === document.activeElement);
+            
+            if (event.key === 'ArrowDown') {
+                rows[(currentIndex + 1) % rows.length].focus();
+            } else if (event.key === 'ArrowUp') {
+                rows[(currentIndex - 1 + rows.length) % rows.length].focus();
+            } else if (event.key === 'Enter' || event.key === ' ') {
+                if (document.activeElement.classList.contains('clickable')) {
+                    document.activeElement.click();
+                    event.preventDefault();
+                }
+            }
+        });
+        
+        // Initialize focusability
+        document.querySelectorAll('tr.clickable').forEach(row => row.setAttribute('tabindex', '0'));
     </script>
 </body>
 </html>
